@@ -3,6 +3,7 @@
 
 ### 使用方法
 一键脚本：
+
 `wget -N --no-check-certificate https://raw.githubusercontent.com/aquasofts/swap-/main/swap.sh && chmod +x swap.sh && ./swap.sh`
 
 ### 啰嗦一句
