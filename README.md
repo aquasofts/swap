@@ -4,7 +4,7 @@
 ### 使用方法
 一键脚本：
 
-`wget -N --no-check-certificate https://raw.githubusercontent.com/aquasofts/swap-/main/swap.sh && chmod +x swap.sh && ./swap.sh`
+`wget -N --no-check-certificate https://raw.githubusercontent.com/aquasofts/swap/main/swap.sh && chmod +x swap.sh && ./swap.sh`
 
 
 若位于您的机器位于中国内地，可使用以下命令：
