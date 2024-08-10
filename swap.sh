@@ -2,8 +2,28 @@
 
 # 检查是否已有swap文件
 if [ -f /swapfile ]; then
-    echo "你已经安装过swap了，请不要重复安装哦！."
-    exit 1
+    echo "检测到已有swap文件，正在删除原有swap文件，并重新安装."
+
+    # 禁用当前的swap文件
+    swapoff /swapfile
+    if [ $? -ne 0 ]; then
+        echo "Failed to disable existing swap. Exiting."
+        exit 1
+    fi
+
+    # 删除现有的swap文件
+    rm /swapfile
+    if [ $? -ne 0 ]; then
+        echo "Failed to remove existing swapfile. Exiting."
+        exit 1
+    fi
+
+    # 从 /etc/fstab 中移除旧的swap配置
+    sed -i '/\/swapfile swap swap defaults 0 0/d' /etc/fstab
+    if [ $? -ne 0 ]; then
+        echo "Failed to remove swapfile entry from /etc/fstab. Exiting."
+        exit 1
+    fi
 fi
 
 # 创建一个大小为3GB的swap文件
@@ -50,4 +70,4 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-echo "Swap 安装成功."
+echo "Swap 安装成功！"
