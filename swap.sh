@@ -1,14 +1,35 @@
 #!/bin/bash
 
+#检测磁盘空间是否充足
+
+# 检查磁盘可用空间，单位为千字节(KB)
+available_space=$(df / | awk 'NR==2 {print $4}')
+
+# 将可用空间转换为GB
+available_space_gb=$(($available_space / 1024 / 1024))
+
+# 判断磁盘空间是否小于3GB
+if [ $available_space_gb -lt 3 ]; then
+    echo "磁盘空间不足，请清理后再试"
+    exit 1
+else
+    echo "磁盘空间足够，继续执行脚本..."
+fi
+
 # 检查是否已有swap文件
 if [ -f /swapfile ]; then
-    echo "检测到已有swap文件，正在删除原有swap文件，并重新安装."
+    echo "检测到已有swap文件，正在检查是否已激活."
 
-    # 禁用当前的swap文件
-    sudo swapoff /swapfile
-    if [ $? -ne 0 ]; then
-        echo "Failed to disable existing swap. Exiting."
-        exit 1
+    # 检查当前swap文件是否被启用
+    if sudo swapon --show | grep -q '/swapfile'; then
+        echo "正在禁用当前的swap文件."
+        sudo swapoff /swapfile
+        if [ $? -ne 0 ]; then
+            echo "Failed to disable existing swap. Exiting."
+            exit 1
+        fi
+    else
+        echo "当前swap文件未启用，无需禁用."
     fi
 
     # 删除现有的swap文件
