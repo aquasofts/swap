@@ -4,12 +4,12 @@
 ### 使用方法
 一键脚本：
 
-`wget -N --no-check-certificate https://raw.githubusercontent.com/aquasofts/swap/main/swap.sh && chmod +x swap.sh && ./swap.sh`
+```wget -N --no-check-certificate https://raw.githubusercontent.com/aquasofts/swap/main/swap.sh && chmod +x swap.sh && ./swap.sh```
 
 
 若位于您的机器位于中国内地，可使用以下命令：
 
-`wget -N --no-check-certificate https://raw.gitcode.com/aquasofts/swap/raw/main/swap.sh && chmod +x swap.sh && ./swap.sh`
+```wget -N --no-check-certificate https://raw.gitcode.com/aquasofts/swap/raw/main/swap.sh && chmod +x swap.sh && ./swap.sh```
 
 ### 啰嗦一句
 1.脚本未加密。里面每个功能都注释的很清楚，不存在任何安全问题，请放心使用。脚本写的很烂有大佬愿意可以提交修改！~
